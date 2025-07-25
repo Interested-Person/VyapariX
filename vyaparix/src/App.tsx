@@ -7,7 +7,7 @@ import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Account from './pages/Account'
 import SellerInfo from './pages/SellerInfo'
-import Navbar from './Components/navbar'
+import Navbar from './components/navbar'
 
 function App() {
 
