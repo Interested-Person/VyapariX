@@ -7,14 +7,15 @@ import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Account from './pages/Account'
 import SellerInfo from './pages/SellerInfo'
+import Navbar from './Components/navbar'
 
 function App() {
 
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
-
           <Route path='/productpage' element={<ProductPage />}></Route>
           <Route path='/account' element={<Account />}></Route>
           <Route path='/login' element={<Login />}></Route>
