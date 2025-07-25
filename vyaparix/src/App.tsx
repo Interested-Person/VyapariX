@@ -7,10 +7,12 @@ import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Account from './pages/Account'
 import SellerInfo from './pages/SellerInfo'
-import Navbar from './components/navbar'
+import Navbar from './Components/navbar'
+import MerchantPrompt from './Components/Modals/PromptIsMerchant'
+import { useAuth } from './hooks/useAuth'
 
 function App() {
-
+const {needsMerchantInfo,completeRegistration} = useAuth();
   return (
     <>
       <Router>
@@ -25,6 +27,7 @@ function App() {
           <Route path="/*" element={<Home />}></Route>
 
         </Routes>
+        {needsMerchantInfo&& <MerchantPrompt onSelect={completeRegistration}/>}
       </Router>
     </>
   )

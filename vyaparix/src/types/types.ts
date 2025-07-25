@@ -13,3 +13,9 @@ export type reviews = {
     rating: number,
     comment: string
 }
+export type User = {
+    uid:string;
+    username:string;
+    isMerchant:boolean;
+    pfpUrl:string;
+}
