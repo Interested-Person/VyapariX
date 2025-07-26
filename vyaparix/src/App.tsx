@@ -10,6 +10,7 @@ import SellerInfo from './pages/SellerInfo'
 import Navbar from './Components/navbar'
 import MerchantPrompt from './Components/Modals/PromptIsMerchant'
 import { useAuth } from './hooks/useAuth'
+import AddProduct from './pages/AddProduct'
 
 function App() {
 const {needsMerchantInfo,completeRegistration} = useAuth();
@@ -19,6 +20,7 @@ const {needsMerchantInfo,completeRegistration} = useAuth();
         <Navbar />
         <Routes>
           <Route path='/productpage' element={<ProductPage />}></Route>
+          <Route path='/addproduct' element={<AddProduct />}></Route>
           <Route path='/account' element={<Account />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/cart' element={<Cart />}></Route>
