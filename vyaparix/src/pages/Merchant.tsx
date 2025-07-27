@@ -9,13 +9,16 @@ const Merchant = () => {
         <div>
             <h1>Merchant</h1>
             <button className="bg-emerald-400 p-4 rounded-md" onClick={() => navigate("/addproduct")}>Add new product</button>
-            <div className="flex justify-center items-center flex-col">
-                <h1 className="mx-auto">Your products</h1>
+            {/* <div className="flex justify-center items-center flex-col"> */}
+            <br />
+            <br />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+
                 {selfProducts.map((p) => {
                     return (
                         <div key={p.id}>
                             {/* <ProductCard product={p} /> */}
-                            <ProductCard2 product={p} />
+                            <ProductCard2 product={p} isMerchantPage={true} />
 
                         </div>
                     )
