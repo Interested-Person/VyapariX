@@ -11,7 +11,6 @@ import Navbar from './Components/navbar'
 import MerchantPrompt from './Components/Modals/PromptIsMerchant'
 import { useAuth } from './hooks/useAuth'
 import AddProduct from './pages/AddProduct'
-
 function App() {
   const { needsMerchantInfo, completeRegistration } = useAuth();
   return (
@@ -30,6 +29,7 @@ function App() {
 
         </Routes>
         {needsMerchantInfo && <MerchantPrompt onSelect={completeRegistration} />}
+
       </Router>
     </>
   )

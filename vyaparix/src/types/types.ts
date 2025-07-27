@@ -5,7 +5,7 @@ export type product = {
     description: string,
     image_address: string,
     category?: string,
-    tag?: string,
+    tag?: string[],
     reviews?: reviews[]
 }
 export type reviews = {
@@ -14,8 +14,8 @@ export type reviews = {
     comment: string
 }
 export type User = {
-    uid:string;
-    username:string;
-    isMerchant:boolean;
-    pfpUrl:string;
+    uid: string;
+    username: string;
+    isMerchant: boolean;
+    pfpUrl: string;
 }
