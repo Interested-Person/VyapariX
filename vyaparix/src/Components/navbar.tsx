@@ -7,10 +7,10 @@ const Navbar = () => {
     const navigate = useNavigate()
     return (<>
         <nav className="select-none bg-emerald-800 h-16 flex items-center justify-between text-white px-3">
-            <span className="flex items-center gap-2 text-emerald-200"><img src={Logo} className="h-20 " alt="" /> <span> {user?.isMerchant?"for Merchants":""}</span></span>
+            <span className="hover:scale-105 cursor-pointer flex items-center gap-2 text-emerald-200" onClick={() => navigate("/")}><img src={Logo} className="h-20 " alt="" /> <span className=""> {user?.isMerchant ? "for Merchants" : ""}</span></span>
             <input type="text" className="rounded-md bg-white h-12 w-96 text-gray-700 outline-0 p-2" placeholder="What's on your mind today?" />
             <div className="flex items-center justify-between">
-                <span className="mx-2 bg-emerald-600 p-2 cursor-pointer hover:scale-105 rounded-md" onClick={() => navigate("/")}>Home</span>
+                {/* <span className="mx-2 bg-emerald-600 p-2 cursor-pointer hover:scale-105 rounded-md" onClick={() => navigate("/")}>Home</span> */}
                 {!isLoggedIn && <span className="mx-2 bg-emerald-600 p-2 cursor-pointer hover:scale-105  rounded-md" onClick={() => navigate("/login")}>Sign in</span>}
                 {user?.isMerchant && <span className="mx-2 bg-emerald-600 p-2 cursor-pointer hover:scale-105  rounded-md" onClick={() => navigate("/merchant")}>Merchant Portal</span>}
 
