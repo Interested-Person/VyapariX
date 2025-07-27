@@ -5,6 +5,7 @@ import { db } from "../../firebase"; // adjust path
 import type { product } from "../types/types"; // your product type
 import placeholderimage from '../assets/placeholderimage.jpg';
 
+let c = 0
 const ProductPage = () => {
   const { productID } = useParams();
   console.log(productID)
@@ -39,11 +40,11 @@ const ProductPage = () => {
 
                 <div className="mt-6 sm:mt-8 lg:mt-0">
                   <h1
-                    className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"
+                    className="text-4xl font-semibold text-gray-900  dark:text-white underline"
                   >
                     {product.name}
                   </h1>
-                  <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
+                  <div className="mt-2 mb-2 sm:items-center sm:gap-4 sm:flex">
                     <p
                       className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white"
                     >
@@ -132,32 +133,8 @@ const ProductPage = () => {
                     {/* </div> */}
                   </div>
 
-                  <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                    <a
-                      href="#"
-                      title=""
-                      className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                      role="button"
-                    >
-                      <svg
-                        className="w-5 h-5 -ms-2 me-2"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
-                        />
-                      </svg>
-                      Add to Cart
-                    </a>
+                  {/* <div className="mt-3 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+
 
                     {/* <a
                       href="#"
@@ -185,19 +162,54 @@ const ProductPage = () => {
 
                       Add to cart
                     </a> */}
-                  </div>
+                  {/* </div> */}
+                  {/* 
+                  <hr className="my-2 md:my-2 border-gray-200 dark:border-gray-800" /> */}
 
-                  <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+                  <p className=" text-gray-500 dark:text-gray-400">
+                    {/* <p className="my-3 text-3xl underline">Description</p> */}
+                    <div className="mb-1 flex overflow-x-scroll hide-scrollbar" >
+                      {product?.tag?.map((t) => {
 
-                  <p className="mb-6 text-gray-500 dark:text-gray-400">
+                        return (
+                          <span key={c++} className="bg-teal-50 text-teal-600 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
+                        )
+                      })}
+                    </div>
                     {product.description}
                   </p>
 
 
                 </div>
+                <button
+                  title=""
+                  className=" flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                  role="button"
+                >
+                  <svg
+                    className="w-5 h-5 -ms-2 me-2"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
+                    />
+                  </svg>
+                  Add to Cart
+                </button>
               </div>
             </div>
+
           </section>
+
 
         </div >
       ) : (

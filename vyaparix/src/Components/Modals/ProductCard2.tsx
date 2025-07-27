@@ -14,7 +14,7 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
 
     const { deleteProduct } = useMerchant();
     const { addToCart } = useCart();
-        const navigate = useNavigate()
+    const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
     }
@@ -23,7 +23,7 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
         <a
 
             className=" bg-teal-600 group relative block w-full max-w-xs mx-auto overflow-hidden rounded-md shadow-sm"
-            onClick={navigateToProductPage}
+
         >
 
 
@@ -37,11 +37,12 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                 }
                 alt={product.description}
                 className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+                onClick={() => { navigateToProductPage() }}
             />
 
             <div className="relative border bg-teal-600 border-teal-400   p-6">
 
-                <div className="flex overflow-x-scroll hide-scrollbar">
+                <div className="flex overflow-x-scroll hide-scrollbar" >
                     {product?.tag?.map((t) => {
 
                         return (
@@ -50,9 +51,9 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                     })}
                 </div>
 
-                <h3 className="mt-4 text-lg font-medium text-gray-900">{product.name}</h3>
+                <h3 className="mt-4 text-lg font-medium text-gray-900" onClick={() => { navigateToProductPage() }}>{product.name}</h3>
 
-                <p className="mt-1.5 text-sm text-gray-700">₹{product.price}</p>
+                <p className="mt-1.5 text-sm text-gray-700" onClick={() => { navigateToProductPage() }}> ₹{product.price}</p>
 
                 <form className="mt-4">
 
