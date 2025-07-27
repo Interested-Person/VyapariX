@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useMerchant } from "../hooks/useMerchant"
+import ProductCard from "../Components/Modals/ProductCard";
 
 const Merchant = () => {
     const { selfProducts } = useMerchant();
@@ -12,14 +13,16 @@ const Merchant = () => {
                 <h1 className="mx-auto">Your products</h1>
                 {selfProducts.map((p) => {
                     return (
-                        <div>
-                            {p.name}:{p.price}Rs
+                        <div key={p.id}>
+                            <ProductCard product={p} />
 
                         </div>
                     )
                 })}
             </div>
+
         </div>
+
     )
 }
 

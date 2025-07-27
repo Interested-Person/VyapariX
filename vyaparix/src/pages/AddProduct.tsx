@@ -10,12 +10,13 @@ const AddProduct = () => {
     const [name, setName] = useState("");
     const [price, setPrice] = useState<number | "">("");
     const [description, setDescription] = useState("");
+    const [image, setImage] = useState<string>("");
 
     if (!user?.isMerchant) return <p>Only merchants can add products.</p>;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!name || !price || !description) {
+        if (!name || !price || !description || !image) {
             alert("All fields are required.");
             return;
         }
@@ -27,7 +28,7 @@ const AddProduct = () => {
             sellerID: user.uid,
             createdAt: new Date(),
             id: "xyz",
-            image_address: "",
+            image_address: image,
             reviews: [],
         };
 
@@ -37,6 +38,7 @@ const AddProduct = () => {
             setName("");
             setPrice("");
             setDescription("");
+            setImage("");
             navigate("/merchant")
         } catch (err) {
             console.error("Failed to add product:", err);
@@ -73,6 +75,15 @@ const AddProduct = () => {
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        required
+                        style={{ width: "100%" }}
+                    />
+                </div>
+                <div>
+                    <label>Image URL:</label>
+                    <textarea
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                         required
                         style={{ width: "100%" }}
                     />

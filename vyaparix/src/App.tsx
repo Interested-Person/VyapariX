@@ -13,7 +13,7 @@ import { useAuth } from './hooks/useAuth'
 import AddProduct from './pages/AddProduct'
 
 function App() {
-const {needsMerchantInfo,completeRegistration} = useAuth();
+  const { needsMerchantInfo, completeRegistration } = useAuth();
   return (
     <>
       <Router>
@@ -29,7 +29,7 @@ const {needsMerchantInfo,completeRegistration} = useAuth();
           <Route path="/*" element={<Home />}></Route>
 
         </Routes>
-        {needsMerchantInfo&& <MerchantPrompt onSelect={completeRegistration}/>}
+        {needsMerchantInfo && <MerchantPrompt onSelect={completeRegistration} />}
       </Router>
     </>
   )
