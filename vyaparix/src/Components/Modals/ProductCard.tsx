@@ -1,7 +1,7 @@
 import type { product } from "../../types/types"
 const ProductCard = ({ product }: { product: product }) => {
     return (
-        <div className="w-64 p-1 text-sm max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-64 p-1 text-sm max-w-sm  border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img className="w-full h-full object-cover rounded-t-lg" src={product.image_address == "" ? undefined : product.image_address} alt="" />
             </a>
