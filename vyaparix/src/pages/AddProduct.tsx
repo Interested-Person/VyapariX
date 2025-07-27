@@ -3,6 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useMerchant } from "../hooks/useMerchant";
 import { useNavigate } from "react-router-dom";
 
+import type { product } from "../types/types";
 const AddProduct = () => {
     const { user } = useAuth();
     const { addProduct } = useMerchant();
@@ -11,17 +12,21 @@ const AddProduct = () => {
     const [price, setPrice] = useState<number | "">("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState<string>("");
+    const [tags_str, settags_str] = useState("");
+
 
     if (!user?.isMerchant) return <p>Only merchants can add products.</p>;
 
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!name || !price || !description || !image) {
+        const tagsArray = tags_str.split(" ")
+        if (!name || !price || !description || !image || !tags_str) {
             alert("All fields are required.");
             return;
         }
 
-        const product = {
+        const product: product = {
             name,
             price: Number(price),
             description,
@@ -30,6 +35,7 @@ const AddProduct = () => {
             id: "xyz",
             image_address: image,
             reviews: [],
+            tag: tagsArray
         };
 
         try {
@@ -84,6 +90,15 @@ const AddProduct = () => {
                     <textarea
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
+                        required
+                        style={{ width: "100%" }}
+                    />
+                </div>
+                <div>
+                    <label>Enter space-separated tags</label>
+                    <textarea
+                        value={tags_str}
+                        onChange={(e) => settags_str(e.target.value)}
                         required
                         style={{ width: "100%" }}
                     />

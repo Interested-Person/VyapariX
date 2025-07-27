@@ -1,7 +1,10 @@
 import type { product } from "../../types/types";
 import placeholderimage from '../../assets/placeholderimage.jpg';
+import { useMerchant } from "../../hooks/useMerchant";
+let c = 0;
 
-const ProductCard2 = ({ product, isMerchantPage }: { product: product, isMerchantPage?: boolean }) => {
+const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, isMerchantPage: boolean, docID: string }) => {
+    const { deleteProduct } = useMerchant();
     return (
         <a
 
@@ -23,10 +26,11 @@ const ProductCard2 = ({ product, isMerchantPage }: { product: product, isMerchan
             />
 
             <div className="relative border border-gray-100 bg-white p-6">
+
                 {product?.tag?.map((t) => {
-                    let c = 0;
+
                     return (
-                        <span key={c++} className="bg-yellow-400 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
+                        <span key={c++} className="bg-emerald-50 text-emerald-600 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
                     )
                 })}
 
@@ -37,11 +41,11 @@ const ProductCard2 = ({ product, isMerchantPage }: { product: product, isMerchan
                 <form className="mt-4">
 
                     {isMerchantPage && <button
-                        className="block w-full rounded-sm bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
-                        onClick={(e) => { e.preventDefault(); }}
+                        className="block w-full rounded-sm bg-emerald-500 p-4 text-sm font-medium transition hover:scale-105"
+                        onClick={(e) => { e.preventDefault(); deleteProduct(docID); }}
                     >Remove </button>}
                     {!isMerchantPage && <button
-                        className="block w-full rounded-sm bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
+                        className="block w-full rounded-sm bg-emerald-500 p-4 text-sm font-medium transition hover:scale-105"
                         onClick={(e) => { e.preventDefault(); }}
                     >Add to Cart</button>}
 

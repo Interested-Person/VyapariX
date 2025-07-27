@@ -16,9 +16,9 @@ const Merchant = () => {
 
                 {selfProducts.map((p) => {
                     return (
-                        <div key={p.id}>
+                        <div key={p.docID}>
                             {/* <ProductCard product={p} /> */}
-                            <ProductCard2 product={p} isMerchantPage={true} />
+                            <ProductCard2 docID={p?.docID ? p.docID : ""} product={p} isMerchantPage={true} />
 
                         </div>
                     )
