@@ -15,7 +15,7 @@ const Home = () => {
                         <ProductCard2
                             docID={p?.docID || ""}
                             product={p}
-                            isMerchantPage={true}
+                            isMerchantPage={false}
                         />
                     </div>
                 ))}

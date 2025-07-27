@@ -18,7 +18,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/productpage' element={<ProductPage />}></Route>
+          <Route path='/productpage/:productID' element={<ProductPage />}></Route>
           <Route path='/addproduct' element={<AddProduct />}></Route>
           <Route path='/account' element={<Account />}></Route>
           <Route path='/login' element={<Login />}></Route>
