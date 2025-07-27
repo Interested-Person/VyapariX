@@ -11,10 +11,15 @@ import Navbar from './Components/navbar'
 import MerchantPrompt from './Components/Modals/PromptIsMerchant'
 import { useAuth } from './hooks/useAuth'
 import AddProduct from './pages/AddProduct'
+import Modal from './Components/Modals/Modal'
+import { ModalProvider } from './hooks/useModal'
 function App() {
   const { needsMerchantInfo, completeRegistration } = useAuth();
   return (
     <>
+
+      <ModalProvider>
+
       <Router>
         <Navbar />
         <Routes>
@@ -27,10 +32,12 @@ function App() {
           <Route path='/sellerinfo' element={<SellerInfo />}></Route>
           <Route path="/*" element={<Home />}></Route>
 
-        </Routes>
-        {needsMerchantInfo && <MerchantPrompt onSelect={completeRegistration} />}
 
-      </Router>
+          </Routes>
+          {needsMerchantInfo && <MerchantPrompt onSelect={completeRegistration} />}
+          <Modal />
+        </Router>
+      </ModalProvider>
     </>
   )
 }

@@ -1,17 +1,24 @@
 import type { product } from "../../types/types";
 import placeholderimage from '../../assets/placeholderimage.jpg';
 import { useMerchant } from "../../hooks/useMerchant";
+
+import { useCart } from "../../hooks/useCart";
+
 import { useNavigate } from "react-router-dom";
+
 
 let c = 0;
 
 
 const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, isMerchantPage: boolean, docID: string }) => {
-    const { deleteProduct } = useMerchant(); //deletes product
-    const navigate = useNavigate()
+
+    const { deleteProduct } = useMerchant();
+    const { addToCart } = useCart();
+        const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
     }
+
     return (
         <a
 
@@ -55,7 +62,9 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                     >Remove </button>}
                     {!isMerchantPage && <button
                         className="block w-full rounded-sm bg-teal-500 p-4 text-sm font-medium transition hover:scale-105"
-                        onClick={(e) => { e.preventDefault(); navigateToProductPage() }} //replace navigateToProductPage() with addtoCart()
+
+                        onClick={(e) => { e.preventDefault(); addToCart(product) }}
+
                     >Add to Cart</button>}
 
                 </form>
