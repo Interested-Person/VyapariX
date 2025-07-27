@@ -8,7 +8,7 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
     return (
         <a
 
-            className=" group relative block w-full max-w-xs mx-auto overflow-hidden rounded-md shadow-sm"
+            className=" bg-teal-600 group relative block w-full max-w-xs mx-auto overflow-hidden rounded-md shadow-sm"
 
         >
 
@@ -25,14 +25,16 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                 className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
             />
 
-            <div className="relative border border-gray-100 bg-white p-6">
+            <div className="relative border bg-teal-600 border-teal-400   p-6">
 
-                {product?.tag?.map((t) => {
+               <div className="flex overflow-x-scroll">
+                 {product?.tag?.map((t) => {
 
                     return (
-                        <span key={c++} className="bg-emerald-50 text-emerald-600 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
+                        <span key={c++} className="bg-teal-50 text-teal-600 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
                     )
                 })}
+               </div>
 
                 <h3 className="mt-4 text-lg font-medium text-gray-900">{product.name}</h3>
 
@@ -41,11 +43,11 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                 <form className="mt-4">
 
                     {isMerchantPage && <button
-                        className="block w-full rounded-sm bg-emerald-500 p-4 text-sm font-medium transition hover:scale-105"
+                        className="block w-full rounded-sm bg-teal-500 p-4 text-sm font-medium transition hover:scale-105"
                         onClick={(e) => { e.preventDefault(); deleteProduct(docID); }}
                     >Remove </button>}
                     {!isMerchantPage && <button
-                        className="block w-full rounded-sm bg-emerald-500 p-4 text-sm font-medium transition hover:scale-105"
+                        className="block w-full rounded-sm bg-teal-500 p-4 text-sm font-medium transition hover:scale-105"
                         onClick={(e) => { e.preventDefault(); }}
                     >Add to Cart</button>}
 
