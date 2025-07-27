@@ -27,14 +27,14 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
 
             <div className="relative border bg-teal-600 border-teal-400   p-6">
 
-               <div className="flex overflow-x-scroll">
-                 {product?.tag?.map((t) => {
+                <div className="flex overflow-x-scroll hide-scrollbar">
+                    {product?.tag?.map((t) => {
 
-                    return (
-                        <span key={c++} className="bg-teal-50 text-teal-600 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
-                    )
-                })}
-               </div>
+                        return (
+                            <span key={c++} className="bg-teal-50 text-teal-600 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
+                        )
+                    })}
+                </div>
 
                 <h3 className="mt-4 text-lg font-medium text-gray-900">{product.name}</h3>
 
