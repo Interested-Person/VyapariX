@@ -1,5 +1,6 @@
 import {
     doc,
+    getDoc,
     onSnapshot,
     updateDoc,
 } from "firebase/firestore";
@@ -11,6 +12,7 @@ import { useModal } from "./useModal";
 
 export const useCart = () => {
     const [cart, setCart] = useState<product[]>([]);
+    const [orders, setOrders] = useState<product[]>([]); //orders
     const { user } = useAuth();
     const { open } = useModal()
 
@@ -21,6 +23,7 @@ export const useCart = () => {
         const unsubscribe = onSnapshot(userDoc, (snap) => {
             const data = snap.data();
             setCart(data?.cart || []);
+            setOrders(data?.orders || []) //set orders
         });
 
         return () => unsubscribe();
@@ -54,5 +57,25 @@ export const useCart = () => {
 
     };
 
-    return { cart, addToCart, removeFromCart, isInCart };
+    const addToOrders = async () => {
+        if (!user) return;
+        const userDoc = doc(db, "users", user.uid);
+        await updateDoc(userDoc, {
+            orders: [...orders, ...cart],
+            cart: [],
+        });
+        console.log("orders taken, submitting requests to merchants")
+        for (const product of cart) {
+            const sellerDoc = doc(db, "users", product.sellerID as string);
+            const sellerSnap = await getDoc(sellerDoc);
+            const sellerData = sellerSnap.data();
+            const prevPendingOrders = (sellerData?.pendingOrders || []);
+            await updateDoc(sellerDoc, {
+                pendingOrders: [...prevPendingOrders, product],
+            })
+
+        }
+    };
+
+    return { cart, addToCart, removeFromCart, isInCart, addToOrders };
 };
