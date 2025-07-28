@@ -6,8 +6,15 @@ const Account = () => {
   const { user, isLoggedIn, logOut } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => { if (!isLoggedIn) navigate(-1); }, []);
-  // if (!isLoggedIn) navigate(-1);
+
+
+
+  if (!isLoggedIn) {
+    navigate(-1);
+  }
+
+
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-teal-900 text-white px-4">
