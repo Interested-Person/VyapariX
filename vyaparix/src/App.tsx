@@ -10,6 +10,7 @@ import SellerInfo from './pages/SellerInfo'
 import Navbar from './Components/navbar'
 import MerchantPrompt from './Components/Modals/PromptIsMerchant'
 import MerchantOrders from './pages/MerchantOrders'
+import Orders from './pages/Orders'
 import { useAuth } from './hooks/useAuth'
 import AddProduct from './pages/AddProduct'
 import Modal from './Components/Modals/Modal'
@@ -33,6 +34,7 @@ function App() {
               <Route path='/merchant' element={<Merchant />}></Route>
               <Route path='/sellerinfo/:sellerID' element={<SellerInfo />}></Route>
               <Route path='/merchantorders' element={<MerchantOrders />}></Route>
+              <Route path='/orders' element={<Orders />}></Route>
               <Route path="/*" element={<Home />}></Route>
 
 
@@ -41,7 +43,7 @@ function App() {
             <Modal />
           </Router>
         </ModalProvider>
-      </ProductsProvider>
+      </ProductsProvider >
     </>
   )
 }

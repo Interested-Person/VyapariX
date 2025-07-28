@@ -1,9 +1,12 @@
 import ProductCard2 from "../Components/Modals/ProductCard2";
 import { useCart } from "../hooks/useCart"
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const { cart, addToOrders } = useCart();
+    const navigate = useNavigate();
     return (
+
         <div className="bg-teal-950 flex flex-col gap-4 w-screen min-h-screen">
             <h1 className="text-xl m-4 mx-auto text-white">Your Cart</h1>
             {cart.length == 0 && <h1 className="text-xl m-4 mx-auto text-white">Your cart is empty</h1>}
@@ -27,6 +30,18 @@ const Cart = () => {
                     className="mx-7 mt-4 text-xl  bg-teal-600 hover:bg-teal-500 text-white font-light py-2 px-6 rounded-full transition-transform hover:scale-105"
                 >
                     Place Order
+                </button>
+                <button
+                    onClick={() => navigate("/orders")}
+                    className="mx-7 mt-4 text-xl  bg-teal-600 hover:bg-teal-500 text-white font-light py-2 px-6 rounded-full transition-transform hover:scale-105"
+                >
+                    Check Orders
+                </button>
+                <button
+                    onClick={() => console.log()}
+                    className="mx-7 mt-4 text-xl  bg-teal-600 hover:bg-teal-500 text-white font-light py-2 px-6 rounded-full transition-transform hover:scale-105"
+                >
+                    Order History
                 </button>
             </div>
 
