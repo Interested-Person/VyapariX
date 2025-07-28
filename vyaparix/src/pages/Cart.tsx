@@ -15,7 +15,7 @@ const Cart = () => {
                         <ProductCard2
                             docID={p?.docID || ""}
                             product={p}
-                            isMerchantPage={false}
+                            whatPage="cart"
                         />
                     </div>
                 ))}

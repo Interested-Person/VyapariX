@@ -2,11 +2,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase"; // adjust path
+import { useCart } from "../hooks/useCart";
 import type { product } from "../types/types"; // your product type
 import placeholderimage from '../assets/placeholderimage.jpg';
 
 let c = 0
 const ProductPage = () => {
+  const { addToCart } = useCart();
   const { productID } = useParams();
   console.log(productID)
   const [product, setProduct] = useState<product | null>(null);
@@ -185,6 +187,7 @@ const ProductPage = () => {
                   title=""
                   className=" flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                   role="button"
+                  onClick={() => addToCart(product)}
                 >
                   <svg
                     className="w-5 h-5 -ms-2 me-2"

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 let c = 0;
 
 
-const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, isMerchantPage: boolean, docID: string }) => {
+const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage: string, docID: string }) => {
 
     const { deleteProduct } = useMerchant();
     const { addToCart } = useCart();
@@ -57,16 +57,22 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
 
                 <form className="mt-4">
 
-                    {isMerchantPage && <button
+                    {(whatPage === "merchant") && <button
                         className="block w-full rounded-sm bg-teal-500  p-1 md:p-4 text-xs md:text-sm font-medium transition hover:scale-105"
                         onClick={(e) => { e.preventDefault(); deleteProduct(docID); }}
                     >Remove </button>}
-                    {!isMerchantPage && <button
+                    {(whatPage === "home") && <button
                         className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
 
                         onClick={(e) => { e.preventDefault(); addToCart(product) }}
 
                     >Add to Cart</button>}
+                    {(whatPage === "cart") && <button
+                        className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
+
+                        onClick={(e) => { e.preventDefault(); addToCart(product) }}
+
+                    >Remove from cart</button>}
 
                 </form>
             </div>
