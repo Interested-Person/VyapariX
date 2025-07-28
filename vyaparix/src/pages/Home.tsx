@@ -5,7 +5,6 @@ const Home = () => {
   const {
     products,
     isSearch,
-    setIsSearch,
     searchResults,
   } = useProducts();
 
