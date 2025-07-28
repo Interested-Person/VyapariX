@@ -1,12 +1,24 @@
 import type { product } from "../../types/types";
 import placeholderimage from '../../assets/placeholderimage.jpg';
 import { useMerchant } from "../../hooks/useMerchant";
+
 import { useCart } from "../../hooks/useCart";
+
+import { useNavigate } from "react-router-dom";
+
+
 let c = 0;
 
+
 const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, isMerchantPage: boolean, docID: string }) => {
+
     const { deleteProduct } = useMerchant();
     const { addToCart } = useCart();
+    const navigate = useNavigate()
+    const navigateToProductPage = () => {
+        navigate(`/productpage/${docID}`)
+    }
+
     return (
         <a
 
@@ -25,11 +37,12 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                 }
                 alt={product.description}
                 className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+                onClick={() => { navigateToProductPage() }}
             />
 
             <div className="relative border bg-teal-600 border-teal-400   p-6">
 
-                <div className="flex overflow-x-scroll hide-scrollbar">
+                <div className="flex overflow-x-scroll hide-scrollbar" >
                     {product?.tag?.map((t) => {
 
                         return (
@@ -38,9 +51,9 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                     })}
                 </div>
 
-                <h3 className="mt-4 text-lg font-medium text-gray-900">{product.name}</h3>
+                <h3 className="mt-4 text-lg font-medium text-gray-900" onClick={() => { navigateToProductPage() }}>{product.name}</h3>
 
-                <p className="mt-1.5 text-sm text-gray-700">₹{product.price}</p>
+                <p className="mt-1.5 text-sm text-gray-700" onClick={() => { navigateToProductPage() }}> ₹{product.price}</p>
 
                 <form className="mt-4">
 
@@ -50,7 +63,9 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                     >Remove </button>}
                     {!isMerchantPage && <button
                         className="block w-full rounded-sm bg-teal-500 p-4 text-sm font-medium transition hover:scale-105"
+
                         onClick={(e) => { e.preventDefault(); addToCart(product) }}
+
                     >Add to Cart</button>}
 
                 </form>

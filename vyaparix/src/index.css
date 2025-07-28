@@ -10,3 +10,8 @@
     scrollbar-width: none;
     /* Firefox */
 }
+
+body {
+    background-color: rgb(4, 47, 46);
+    /*teal-950*/
+}

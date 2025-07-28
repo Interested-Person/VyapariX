@@ -17,18 +17,21 @@ function App() {
   const { needsMerchantInfo, completeRegistration } = useAuth();
   return (
     <>
+
       <ModalProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path='/productpage' element={<ProductPage />}></Route>
-            <Route path='/addproduct' element={<AddProduct />}></Route>
-            <Route path='/account' element={<Account />}></Route>
-            <Route path='/login' element={<Login />}></Route>
-            <Route path='/cart' element={<Cart />}></Route>
-            <Route path='/merchant' element={<Merchant />}></Route>
-            <Route path='/sellerinfo' element={<SellerInfo />}></Route>
-            <Route path="/*" element={<Home />}></Route>
+
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/productpage/:productID' element={<ProductPage />}></Route>
+          <Route path='/addproduct' element={<AddProduct />}></Route>
+          <Route path='/account' element={<Account />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/cart' element={<Cart />}></Route>
+          <Route path='/merchant' element={<Merchant />}></Route>
+          <Route path='/sellerinfo' element={<SellerInfo />}></Route>
+          <Route path="/*" element={<Home />}></Route>
+
 
           </Routes>
           {needsMerchantInfo && <MerchantPrompt onSelect={completeRegistration} />}
