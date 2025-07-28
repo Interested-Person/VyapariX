@@ -13,7 +13,7 @@ let c = 0;
 const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage: string, docID: string }) => {
 
     const { deleteProduct } = useMerchant();
-    const { addToCart } = useCart();
+    const { addToCart, removeFromCart } = useCart();
     const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
@@ -70,7 +70,7 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
                     {(whatPage === "cart") && <button
                         className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
 
-                        onClick={(e) => { e.preventDefault(); addToCart(product) }}
+                        onClick={(e) => { e.preventDefault(); removeFromCart(product) }}
 
                     >Remove from cart</button>}
 

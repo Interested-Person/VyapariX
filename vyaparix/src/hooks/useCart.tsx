@@ -12,7 +12,7 @@ import { useModal } from "./useModal";
 export const useCart = () => {
     const [cart, setCart] = useState<product[]>([]);
     const { user } = useAuth();
-    const {open} =useModal()
+    const { open } = useModal()
 
     useEffect(() => {
         if (!user) return;
@@ -44,6 +44,15 @@ export const useCart = () => {
         open("Successfully added to cart");
 
     };
+    const removeFromCart = async (productToRemove: product) => {
+        if (!user) return;
+        const userDoc = doc(db, "users", user.uid);
+        await updateDoc(userDoc, {
+            cart: cart.filter((item) => item.docID !== productToRemove.docID),
+        });
+        console.log(`Successfully removed ${productToRemove.docID}from cart`);
 
-    return { cart, addToCart, isInCart };
+    };
+
+    return { cart, addToCart, removeFromCart, isInCart };
 };
