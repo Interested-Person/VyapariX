@@ -2,6 +2,8 @@ import { useCart } from "../hooks/useCart"
 import ProductCard2 from "../Components/Modals/ProductCard2";
 const MerchantOrders = () => {
     const { pendingOrders } = useCart();
+
+
     return (
         <div>
             <div>

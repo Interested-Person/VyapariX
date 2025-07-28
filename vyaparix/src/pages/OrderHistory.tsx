@@ -3,12 +3,13 @@ import { useCart } from "../hooks/useCart";
 
 const OrderHistory = () => {
     const { orderHistory } = useCart();
+    const reversed = [...orderHistory].reverse();
     return (
-        <div>
+        <div className="bg-teal-950 flex flex-col gap-4 w-screen min-h-screen">
             <h1 className="text-xl m-4 mx-auto text-white">Order History</h1>
-            {orderHistory.length == 0 && <h1 className="text-xl m-4 mx-auto text-white">Your cart is empty</h1>}
+            {reversed.length == 0 && <h1 className="text-xl m-4 mx-auto text-white">Your cart is empty</h1>}
             <div className="flex flex-wrap">
-                {orderHistory.map((p) => (
+                {reversed.map((p) => (
                     <div
                         className="flex-none basis-1/2 md:basis-1/3 xl:basis-1/4 my-4"
                         key={p.docID}
