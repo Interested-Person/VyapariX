@@ -9,7 +9,8 @@ export type product = {
     category?: string,
     tag?: string[],
     reviews?: reviews[],
-    createdAt?: any
+    createdAt?: any,
+    soldBy?: string
 }
 export type reviews = {
     user_id: string,

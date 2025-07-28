@@ -55,7 +55,7 @@ const ProductPage = () => {
                     <p
                       className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white"
                     >
-                      ₹{product.price}
+                      ₹{product.price}{product.soldBy ? (<span>, offered by <span onClick={() => { console.log("insert code to go to merchant") }}>{product.soldBy}</span></span>) : null}
                     </p>
 
                     {/* <div className="flex items-center gap-2 mt-2 sm:mt-0">

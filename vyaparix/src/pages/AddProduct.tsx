@@ -40,7 +40,8 @@ const AddProduct = () => {
             id: "xyz",
             image_address: image,
             reviews: [],
-            tag: tagsArray
+            tag: tagsArray,
+            soldBy: user.username,
         };
 
         try {
