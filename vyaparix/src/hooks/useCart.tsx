@@ -7,10 +7,12 @@ import { db } from "../../firebase";
 import { useEffect, useState } from "react";
 import type { product } from "../types/types";
 import { useAuth } from "./useAuth";
+import { useModal } from "./useModal";
 
 export const useCart = () => {
     const [cart, setCart] = useState<product[]>([]);
     const { user } = useAuth();
+    const {open} =useModal()
 
     useEffect(() => {
         if (!user) return;
