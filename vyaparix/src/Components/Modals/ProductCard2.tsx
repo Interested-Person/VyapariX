@@ -22,7 +22,7 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
     return (
         <a
 
-            className=" bg-teal-600 group relative block w-full max-w-xs mx-auto overflow-hidden rounded-md shadow-sm"
+            className=" bg-teal-600 group relative block w-40 md:w-64  xl:w-full max-w-xs mx-auto overflow-hidden rounded-md shadow-sm"
 
         >
 
@@ -36,33 +36,33 @@ const ProductCard2 = ({ product, isMerchantPage, docID }: { product: product, is
                     }
                 }
                 alt={product.description}
-                className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+                className="h-40 w-full  md:h-64  object-cover transition duration-500 group-hover:scale-105 "
                 onClick={() => { navigateToProductPage() }}
             />
 
-            <div className="relative border bg-teal-600 border-teal-400   p-6">
+            <div className="relative border bg-teal-600 border-teal-400   p-1 md:p-6">
 
                 <div className="flex overflow-x-scroll hide-scrollbar" >
                     {product?.tag?.map((t) => {
 
                         return (
-                            <span key={c++} className="bg-teal-50 text-teal-600 px-3 py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
+                            <span key={c++} className="bg-teal-50 text-teal-600 px-2 md:px-3 py-1 md:py-1.5 text-xs font-medium whitespace-nowrap mr-2"> {t} </span>
                         )
                     })}
                 </div>
 
-                <h3 className="mt-4 text-lg font-medium text-gray-900" onClick={() => { navigateToProductPage() }}>{product.name}</h3>
+                <h3 className="mt-4 text-sm md:text-lg font-medium text-gray-900" onClick={() => { navigateToProductPage() }}>{product.name}</h3>
 
-                <p className="mt-1.5 text-sm text-gray-700" onClick={() => { navigateToProductPage() }}> ₹{product.price}</p>
+                <p className="mt-1.5 text-xs md:text-sm text-gray-700" onClick={() => { navigateToProductPage() }}> ₹{product.price}</p>
 
                 <form className="mt-4">
 
                     {isMerchantPage && <button
-                        className="block w-full rounded-sm bg-teal-500 p-4 text-sm font-medium transition hover:scale-105"
+                        className="block w-full rounded-sm bg-teal-500  p-1 md:p-4 text-xs md:text-sm font-medium transition hover:scale-105"
                         onClick={(e) => { e.preventDefault(); deleteProduct(docID); }}
                     >Remove </button>}
                     {!isMerchantPage && <button
-                        className="block w-full rounded-sm bg-teal-500 p-4 text-sm font-medium transition hover:scale-105"
+                        className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
 
                         onClick={(e) => { e.preventDefault(); addToCart(product) }}
 

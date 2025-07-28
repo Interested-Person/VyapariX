@@ -9,7 +9,7 @@ const Cart = () => {
             <div className="flex flex-wrap">
                 {cart.map((p) => (
                     <div
-                        className="flex-none basis-1/4 my-4"
+                        className="flex-none basis-1/2 md:basis-1/3 xl:basis-1/4 my-4"
                         key={p.docID}
                     >
                         <ProductCard2
