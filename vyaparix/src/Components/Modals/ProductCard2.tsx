@@ -13,7 +13,7 @@ let c = 0;
 const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage: string, docID: string }) => {
 
     const { deleteProduct } = useMerchant();
-    const { addToCart, removeFromCart } = useCart();
+    const { addToCart, removeFromCart, fulfillOrder } = useCart();
     const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
@@ -77,9 +77,10 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
                     {(whatPage === "merchantorders") && <button
                         className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
 
-                        onClick={(e) => { e.preventDefault(); console.log("insert function to fulfill order") }}
+                        onClick={(e) => { e.preventDefault(); fulfillOrder(product) }}
 
                     >Fulfill order</button>}
+                    {(whatPage === "orders") && null}
 
                 </form>
             </div>

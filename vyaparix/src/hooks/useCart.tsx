@@ -44,6 +44,8 @@ export const useCart = () => {
         }
 
         const userDoc = doc(db, "users", user.uid);
+        productToAdd.buyerID = user.uid //adding buyer id
+        productToAdd.boughtBy = user.username // adding buyer name
         await updateDoc(userDoc, {
             cart: [...cart, productToAdd],
         });
@@ -80,5 +82,23 @@ export const useCart = () => {
         }
     };
 
-    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders };
+    const fulfillOrder = async (product: product) => {
+        if (!user) return;
+        const userDoc = doc(db, "users", user.uid);
+        await updateDoc(userDoc, {
+            pendingOrders: pendingOrders.filter((item) => item.docID !== product.docID && item.createdAt !== product.createdAt),
+        });
+
+        const buyerDoc = doc(db, "users", product.buyerID as string);
+        const buyerSnap = await getDoc(buyerDoc)
+        const buyerData = buyerSnap.data()
+        const buyerPrevOrders = (buyerData?.orders || []);
+        const buyerNewOrders = buyerPrevOrders.filter((item: any) => item.docID !== product.docID && item.createdAt !== product.createdAt && item.buyerID !== product.buyerID);
+        await updateDoc(buyerDoc, {
+            orders: buyerNewOrders,
+        })
+
+    }
+
+    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder };
 };

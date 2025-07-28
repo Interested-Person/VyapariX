@@ -16,7 +16,7 @@ const Orders = () => {
                         <ProductCard2
                             docID={p?.docID || ""}
                             product={p}
-                            whatPage="cart"
+                            whatPage="orders"
                         />
                     </div>
                 ))}
