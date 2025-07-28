@@ -19,7 +19,7 @@ const Home = () => {
 
       <div className="flex flex-wrap">
         {displayedProducts.map((p) => (
-          <div className="flex-none basis-1/4 my-4" key={p.docID}>
+          <div className="flex-none basis-1/2 md:basis-1/3 xl:basis-1/4 my-4" key={p.docID}>
             <ProductCard2
               docID={p?.docID || ""}
               product={p}
