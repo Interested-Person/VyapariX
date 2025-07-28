@@ -10,6 +10,7 @@ import SellerInfo from './pages/SellerInfo'
 import Navbar from './Components/navbar'
 import MerchantPrompt from './Components/Modals/PromptIsMerchant'
 import MerchantOrders from './pages/MerchantOrders'
+import OrderHistory from './pages/OrderHistory'
 import Orders from './pages/Orders'
 import { useAuth } from './hooks/useAuth'
 import AddProduct from './pages/AddProduct'
@@ -35,6 +36,7 @@ function App() {
               <Route path='/sellerinfo/:sellerID' element={<SellerInfo />}></Route>
               <Route path='/merchantorders' element={<MerchantOrders />}></Route>
               <Route path='/orders' element={<Orders />}></Route>
+              <Route path='/orderhistory' element={<OrderHistory />}></Route>
               <Route path="/*" element={<Home />}></Route>
 
 

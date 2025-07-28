@@ -14,6 +14,7 @@ export const useCart = () => {
     const [cart, setCart] = useState<product[]>([]);
     const [orders, setOrders] = useState<product[]>([]); //orders for customer
     const [pendingOrders, setPendingOrders] = useState<product[]>([]);
+    const [orderHistory, setOrderHistory] = useState<product[]>([]);
 
     const { user } = useAuth();
     const { open } = useModal()
@@ -27,6 +28,7 @@ export const useCart = () => {
             setCart(data?.cart || []);
             setOrders(data?.orders || []) //set orders
             setPendingOrders(data?.pendingOrders || [])
+            setOrderHistory(data?.orderHistory || [])
         });
 
         return () => unsubscribe();
@@ -84,21 +86,34 @@ export const useCart = () => {
 
     const fulfillOrder = async (product: product) => {
         if (!user) return;
+
+        console.log("fulfillingggg order")
         const userDoc = doc(db, "users", user.uid);
         await updateDoc(userDoc, {
-            pendingOrders: pendingOrders.filter((item) => item.docID !== product.docID && item.createdAt !== product.createdAt),
+            pendingOrders: pendingOrders.filter((item) =>
+                !(
+                    item.docID === product.docID &&
+                    item.buyerID === product.buyerID
+                )
+            )
+            ,
         });
 
         const buyerDoc = doc(db, "users", product.buyerID as string);
         const buyerSnap = await getDoc(buyerDoc)
         const buyerData = buyerSnap.data()
         const buyerPrevOrders = (buyerData?.orders || []);
-        const buyerNewOrders = buyerPrevOrders.filter((item: any) => item.docID !== product.docID && item.createdAt !== product.createdAt && item.buyerID !== product.buyerID);
+        const buyerOrderHistory = (buyerData?.orderHistory || []);
+        const buyerNewOrders = buyerPrevOrders.filter((item: any) => !(
+            item.docID === product.docID &&
+            item.buyerID === product.buyerID
+        ));
         await updateDoc(buyerDoc, {
-            orders: buyerNewOrders,
+            orders: buyerNewOrders, //removing order from customer
+            orderHistory: [...buyerOrderHistory, product],
         })
 
     }
 
-    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder };
+    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder, orderHistory };
 };
