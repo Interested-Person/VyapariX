@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { useEffect } from "react";
 
 const Account = () => {
   const { user, isLoggedIn, logOut } = useAuth();
