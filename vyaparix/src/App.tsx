@@ -13,31 +13,33 @@ import { useAuth } from './hooks/useAuth'
 import AddProduct from './pages/AddProduct'
 import Modal from './Components/Modals/Modal'
 import { ModalProvider } from './hooks/useModal'
+import { ProductsProvider } from './hooks/useProducts'
 function App() {
   const { needsMerchantInfo, completeRegistration } = useAuth();
   return (
     <>
+      <ProductsProvider>
+        <ModalProvider>
 
-      <ModalProvider>
-
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/productpage/:productID' element={<ProductPage />}></Route>
-          <Route path='/addproduct' element={<AddProduct />}></Route>
-          <Route path='/account' element={<Account />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/cart' element={<Cart />}></Route>
-          <Route path='/merchant' element={<Merchant />}></Route>
-          <Route path='/sellerinfo' element={<SellerInfo />}></Route>
-          <Route path="/*" element={<Home />}></Route>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path='/productpage/:productID' element={<ProductPage />}></Route>
+              <Route path='/addproduct' element={<AddProduct />}></Route>
+              <Route path='/account' element={<Account />}></Route>
+              <Route path='/login' element={<Login />}></Route>
+              <Route path='/cart' element={<Cart />}></Route>
+              <Route path='/merchant' element={<Merchant />}></Route>
+              <Route path='/sellerinfo' element={<SellerInfo />}></Route>
+              <Route path="/*" element={<Home />}></Route>
 
 
-          </Routes>
-          {needsMerchantInfo && <MerchantPrompt onSelect={completeRegistration} />}
-          <Modal />
-        </Router>
-      </ModalProvider>
+            </Routes>
+            {needsMerchantInfo && <MerchantPrompt onSelect={completeRegistration} />}
+            <Modal />
+          </Router>
+        </ModalProvider>
+      </ProductsProvider>
     </>
   )
 }
