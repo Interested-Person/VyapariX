@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className="bg-teal-950 flex flex-col gap-4 w-screen min-h-screen">
       <div className="flex justify-between items-center m-4">
-        <h1 className="text-xl text-white">Recently Added</h1>
+        <h1 className="text-xl text-white">Storefront: Recently Added</h1>
 
       </div>
 

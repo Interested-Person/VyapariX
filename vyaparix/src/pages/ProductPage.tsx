@@ -5,12 +5,14 @@ import { db } from "../../firebase"; // adjust path
 import { useCart } from "../hooks/useCart";
 import type { product } from "../types/types"; // your product type
 import placeholderimage from '../assets/placeholderimage.jpg';
+import { useNavigate } from "react-router-dom";
 
 let c = 0
 const ProductPage = () => {
+  const navigate = useNavigate();
   const { addToCart } = useCart();
   const { productID } = useParams();
-  console.log(productID)
+
   const [product, setProduct] = useState<product | null>(null);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const ProductPage = () => {
 
                 <div className="mt-6 sm:mt-8 lg:mt-0">
                   <h1
-                    className="text-4xl font-semibold text-gray-900  dark:text-white underline"
+                    className="text-4xl font-semibold text-gray-900  dark:text-white underline "
                   >
                     {product.name}
                   </h1>
@@ -55,7 +57,7 @@ const ProductPage = () => {
                     <p
                       className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white"
                     >
-                      ₹{product.price}{product.soldBy ? (<span>, offered by <span onClick={() => { console.log("insert code to go to merchant") }}>{product.soldBy}</span></span>) : null}
+                      ₹{product.price}{product.soldBy ? (<span>, offered by <span className="text-blue-200 underline cursor-pointer" onClick={() => { navigate(`/sellerinfo/${product.sellerID}`) }}>{product.soldBy}</span></span>) : null}
                     </p>
 
                     {/* <div className="flex items-center gap-2 mt-2 sm:mt-0">

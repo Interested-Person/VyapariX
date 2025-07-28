@@ -5,7 +5,7 @@ const Cart = () => {
     const { cart, addToOrders } = useCart();
     return (
         <div className="bg-teal-950 flex flex-col gap-4 w-screen min-h-screen">
-            <h1 className="text-xl m-4 mx-auto text-white">Recently Added</h1>
+            <h1 className="text-xl m-4 mx-auto text-white">Your Cart</h1>
             {cart.length == 0 && <h1 className="text-xl m-4 mx-auto text-white">Your cart is empty</h1>}
             <div className="flex flex-wrap">
                 {cart.map((p) => (
