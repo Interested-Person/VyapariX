@@ -45,7 +45,6 @@ const AddProduct = () => {
 
         try {
             await addProduct(product);
-            open("Added product");
             setName("");
             setPrice("");
             setDescription("");

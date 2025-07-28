@@ -12,11 +12,12 @@ import {
 import { db } from "../../firebase";
 import type { product } from "../types/types";
 import { useAuth } from "./useAuth";
+import { useModal } from "./useModal";
 
 export const useMerchant = () => {
   const { user } = useAuth();
   const [selfProducts, setSelfProducts] = useState<product[]>([]);
-
+  const {open} = useModal();
   useEffect(() => {
     if (!user) return;
 
@@ -52,8 +53,10 @@ export const useMerchant = () => {
     const docRef = doc(db, "products", productId);
     try {
       await deleteDoc(docRef);
+      open(`Deleted product with ID: ${productId}`)
       console.log(`✅ Deleted product with ID: ${productId}`);
-    } catch (err) {
+    } catch (err:any) {
+      open("❌ Failed to delete product "+err.toString());
       console.error("❌ Failed to delete product:", err);
     }
   };
