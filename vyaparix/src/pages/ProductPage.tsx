@@ -166,7 +166,7 @@ const ProductPage = () => {
                   {/* 
                   <hr className="my-2 md:my-2 border-gray-200 dark:border-gray-800" /> */}
 
-                  <p className=" text-gray-500 dark:text-gray-400">
+                  <div className=" text-gray-500 dark:text-gray-400">
                     {/* <p className="my-3 text-3xl underline">Description</p> */}
                     <div className="mb-1 flex overflow-x-scroll hide-scrollbar" >
                       {product?.tag?.map((t) => {
@@ -177,7 +177,7 @@ const ProductPage = () => {
                       })}
                     </div>
                     {product.description}
-                  </p>
+                  </div>
 
 
                 </div>

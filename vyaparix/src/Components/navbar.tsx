@@ -9,7 +9,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid"; // for cross icon
 const Navbar = () => {
   const { user, isLoggedIn } = useAuth();
   const navigate = useNavigate();
-  const { searchProducts,isSearch,setIsSearch } = useProducts();
+  const { searchProducts, isSearch, setIsSearch } = useProducts();
   const [searchText, setSearchText] = useState("");
 
   // Debounced search effect
@@ -47,9 +47,10 @@ const Navbar = () => {
           <span className="absolute hidden md:block top-12  text-xs font-bold">
             {user?.isMerchant ? "for Merchants" : ""}
           </span>
-        </span>
+        </span> {/* logo */}
 
-        <div className="relative w-96">
+        <div className="relative w-40 sm:w-60 md:w-80 ">
+
           <input
             type="text"
             value={searchText}
@@ -63,7 +64,7 @@ const Navbar = () => {
               className="h-5 w-5 text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer hover:text-red-500"
             />
           )}
-        </div>
+        </div> {/*search bar*/}
 
         <div className="flex items-center justify-between">
           {!isLoggedIn && (
@@ -75,15 +76,6 @@ const Navbar = () => {
             </span>
           )}
 
-          {user?.isMerchant && (
-            <span
-              className="mx-2 text-xs md:text-sm bg-teal-600 p-2 cursor-pointer hover:scale-105 rounded-md"
-              onClick={() => navigate("/merchant")}
-            >
-              Merchant Portal
-            </span>
-          )}
-
           {isLoggedIn && <div className=" hidden md:block mx-2">{user?.username}</div>}
           {isLoggedIn && (
             <img
@@ -91,15 +83,16 @@ const Navbar = () => {
               referrerPolicy="no-referrer"
               loading="lazy"
               src={user?.pfpUrl}
-              onClick={() => navigate("account")}
+              onClick={() => navigate("/account")}
             />
           )}
 
           <ShoppingCartIcon
-            className="text-teal-400 h-10 cursor-pointer hover:scale-105"
+            className="text-teal-400 h-10 mx-2 cursor-pointer hover:scale-105"
             onClick={() => navigate("/cart")}
-          />
-        </div>
+          /> {/* cart icon */}
+        </div> {/*profile pic and cart icon*/}
+
       </nav>
       <nav className="bg-teal-700 w-full h-8"></nav>
     </>
