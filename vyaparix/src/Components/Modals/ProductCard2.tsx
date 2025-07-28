@@ -73,6 +73,12 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
                         onClick={(e) => { e.preventDefault(); removeFromCart(product) }}
 
                     >Remove from cart</button>}
+                    {(whatPage === "merchantorders") && <button
+                        className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
+
+                        onClick={(e) => { e.preventDefault(); console.log("insert function to fulfill order") }}
+
+                    >Fulfill order</button>}
 
                 </form>
             </div>

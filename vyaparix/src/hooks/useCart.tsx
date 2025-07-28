@@ -12,7 +12,9 @@ import { useModal } from "./useModal";
 
 export const useCart = () => {
     const [cart, setCart] = useState<product[]>([]);
-    const [orders, setOrders] = useState<product[]>([]); //orders
+    const [orders, setOrders] = useState<product[]>([]); //orders for customer
+    const [pendingOrders, setPendingOrders] = useState<product[]>([]);
+
     const { user } = useAuth();
     const { open } = useModal()
 
@@ -24,6 +26,7 @@ export const useCart = () => {
             const data = snap.data();
             setCart(data?.cart || []);
             setOrders(data?.orders || []) //set orders
+            setPendingOrders(data?.pendingOrders || [])
         });
 
         return () => unsubscribe();
@@ -77,5 +80,5 @@ export const useCart = () => {
         }
     };
 
-    return { cart, addToCart, removeFromCart, isInCart, addToOrders };
+    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders };
 };

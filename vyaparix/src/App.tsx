@@ -9,6 +9,7 @@ import Account from './pages/Account'
 import SellerInfo from './pages/SellerInfo'
 import Navbar from './Components/navbar'
 import MerchantPrompt from './Components/Modals/PromptIsMerchant'
+import MerchantOrders from './pages/MerchantOrders'
 import { useAuth } from './hooks/useAuth'
 import AddProduct from './pages/AddProduct'
 import Modal from './Components/Modals/Modal'
@@ -31,6 +32,7 @@ function App() {
               <Route path='/cart' element={<Cart />}></Route>
               <Route path='/merchant' element={<Merchant />}></Route>
               <Route path='/sellerinfo' element={<SellerInfo />}></Route>
+              <Route path='/merchantorders' element={<MerchantOrders />}></Route>
               <Route path="/*" element={<Home />}></Route>
 
 

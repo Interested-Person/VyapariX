@@ -14,7 +14,7 @@ const Merchant = () => {
             <div className="flex gap-2 md:gap-10 text-xs md:text-sm ">
                 <button className="bg-teal-400 p-1 md:p-4 rounded-md" onClick={() => navigate("/addproduct")}>Add new product</button>
                 <button className="bg-teal-400 p-1 md:p-4 rounded-md" >Check revenue</button>
-                <button className="bg-teal-400 p-1 md:p-4 rounded-md" >Check pending Orders</button>
+                <button className="bg-teal-400 p-1 md:p-4 rounded-md" onClick={() => { user?.isMerchant && navigate("/merchantorders") }}>Check pending Orders</button>
 
             </div>
             <h2 className="text-xl text-white">Currently Listed Products</h2>

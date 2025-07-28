@@ -36,7 +36,12 @@ const ProductPage = () => {
               <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
 
-                  <img className="w-full " src={product.image_address || placeholderimage} alt="" />
+                  <img className="w-full " src={product.image_address || placeholderimage} onError={
+                    (e) => {
+                      e.preventDefault();
+                      e.currentTarget.src = placeholderimage;
+                    }
+                  } alt="" />
                   {/* <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" /> */}
                 </div>
 
