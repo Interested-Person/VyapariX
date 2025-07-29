@@ -6,30 +6,31 @@ import { useCart } from "../../hooks/useCart";
 
 import { useNavigate } from "react-router-dom";
 import Review from "./Review";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 let c = 0;
 
 
 const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage: string, docID: string }) => {
-
     const { deleteProduct } = useMerchant();
-    const { addToCart, removeFromCart, fulfillOrder, addReview } = useCart();
+    const { addToCart, removeFromCart, fulfillOrder } = useCart();
     const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
     }
-    const [rating, setRating] = useState(0)
-    useEffect(() => {
-        let rating = 0;
-        let no_of_ratings = product?.reviews?.length || 1
-        product?.reviews?.forEach(review => {
-            rating += review.rating
-        });
-        rating = rating / no_of_ratings
-        setRating(rating)
-    }, [product])
+
+    const [rating] = useState(0) //number to be displayed on product
+    //  INSERT CODE TO CALCULATE AVERAGE RATING
+    // useEffect(() => {
+    //     let sum = 0;
+    //     reviews.forEach((review) => {
+    //         sum += review.rating
+    //     })
+    //     const average = sum / reviews.length
+    //     setRating(average)
+    // }, [reviews])
+
 
 
 
@@ -95,12 +96,12 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
 
                     >Fulfill order from {product.boughtBy}</button>}
                     {(whatPage === "orders") && null}
-                    {(whatPage === "orderhistory") && <button
+                    {(whatPage === "orderhistory") && <div><button
                         className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
 
-                        onClick={(e) => { e.preventDefault(); addReview(product) }}
+                        onClick={(e) => { e.preventDefault(); }}
 
-                    >Add review </button>}
+                    >Add review </button></div>}
                 </form>
             </div>
         </a>

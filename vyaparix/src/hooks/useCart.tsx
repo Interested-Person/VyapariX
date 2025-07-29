@@ -6,7 +6,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
-import type { product } from "../types/types";
+import type { product, reviews } from "../types/types";
 import { useAuth } from "./useAuth";
 import { useModal } from "./useModal";
 
@@ -115,9 +115,34 @@ export const useCart = () => {
 
     }
 
-    const addReview = async (product: product) => {
-        console.log("adding review")
-        //const productDoc = doc(db, "products", product.docID as string);
+    const addReview = async (product: product, newReview: reviews) => {
+        if (!user) return;
+
+        const productDoc = doc(db, "products", product.docID as string);
+        const productSnap = await getDoc(productDoc);
+
+        if (!productSnap.exists()) {
+            console.error("Product not found");
+            return;
+        }
+
+        const productData = productSnap.data();
+        const existingReviews: reviews[] = productData.reviews || [];
+
+        // Filter out any review from the same user
+        const updatedReviews = existingReviews.filter(
+            (review) => review.user_id !== user.uid
+        );
+
+        // Add the new/updated review
+        updatedReviews.push(newReview);
+
+        // Update the product document
+        await updateDoc(productDoc, {
+            reviews: updatedReviews,
+        });
+
+        console.log("Review added/updated successfully");
     }
 
     return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder, orderHistory, addReview };

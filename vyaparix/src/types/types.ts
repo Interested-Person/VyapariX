@@ -16,8 +16,10 @@ export type product = {
 }
 export type reviews = {
     user_id: string,
+    user_name: string,
     rating: number,
-    comment: string
+    comment?: string,
+
 }
 export type User = {
     uid: string;
