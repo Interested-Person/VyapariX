@@ -6,7 +6,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
-import type { product, reviews } from "../types/types";
+import type { product, } from "../types/types";
 import { useAuth } from "./useAuth";
 import { useModal } from "./useModal";
 
