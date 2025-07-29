@@ -1,9 +1,19 @@
 import ProductCard2 from "../Components/Modals/ProductCard2";
 import { useCart } from "../hooks/useCart"
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Cart = () => {
     const { cart, addToOrders } = useCart();
+    const [cartTotal, setCartTotal] = useState(0);
+    useEffect(() => {
+        let total = 0;
+        cart.forEach((item) => {
+            total += item.price;
+        });
+        setCartTotal(total);
+    }, [cart])
+
     const navigate = useNavigate();
     return (
 
@@ -23,6 +33,10 @@ const Cart = () => {
                         />
                     </div>
                 ))}
+
+            </div>
+            <div>
+                <h1 className="ml-10 text-xl m-4 mx-auto text-white">Cart Total: ₹{cartTotal}</h1>
             </div>
             <div>
                 <button

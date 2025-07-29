@@ -79,7 +79,7 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
 
                         onClick={(e) => { e.preventDefault(); fulfillOrder(product) }}
 
-                    >Fulfill order</button>}
+                    >Fulfill order from {product.boughtBy}</button>}
                     {(whatPage === "orders") && null}
 
                 </form>
