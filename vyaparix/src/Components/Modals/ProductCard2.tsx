@@ -19,13 +19,13 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
     const { user } = useAuth();
     const { deleteProduct } = useMerchant();
     const { addToCart, removeFromCart, fulfillOrder } = useCart();
-    const { addReview } = useProducts();
+    const { addReview, products } = useProducts();
     const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
     }
 
-    const [rating] = useState(0) //number to be displayed on product
+    const [rating, setRating] = useState(0) //number to be displayed on product
     const [comment, setComment] = useState<string | undefined>("")
     const [inputRating, setInputRating] = useState(0) //number to be sent to db
     const rate: reviews = {
@@ -36,11 +36,26 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
     }
 
     //  INSERT CODE TO CALCULATE AVERAGE RATING and store in rating
-
-
     useEffect(() => {
-        console.log(rate)
-    }, [rate])
+        let sum = 0;
+        let len = -1;
+
+        const currentProduct = products.find((p) => p.docID === docID);
+
+        if (currentProduct && currentProduct.reviews) {
+            currentProduct.reviews.forEach((r) => {
+                sum += r.rating;
+            });
+            len = currentProduct.reviews.length;
+        }
+
+        let avgRating = 0;
+        if (len > 0) {
+            avgRating = sum / len;
+        }
+
+        setRating(Number(avgRating.toFixed(1)));
+    }, [products, docID]);
 
 
 
