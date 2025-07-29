@@ -1,4 +1,4 @@
-import type { product } from "../../types/types";
+import type { product, reviews } from "../../types/types";
 import placeholderimage from '../../assets/placeholderimage.jpg';
 import { useMerchant } from "../../hooks/useMerchant";
 
@@ -6,30 +6,41 @@ import { useCart } from "../../hooks/useCart";
 
 import { useNavigate } from "react-router-dom";
 import Review from "./Review";
-import { useState } from "react";
+import ReviewStar from "./ReviewStar";
+import { useEffect, useState } from "react";
+import { useProducts } from "../../hooks/useProducts";
+import { useAuth } from "../../hooks/useAuth";
 
 
 let c = 0;
 
 
 const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage: string, docID: string }) => {
+    const { user } = useAuth();
     const { deleteProduct } = useMerchant();
     const { addToCart, removeFromCart, fulfillOrder } = useCart();
+    const { addReview } = useProducts();
     const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
     }
 
     const [rating] = useState(0) //number to be displayed on product
-    //  INSERT CODE TO CALCULATE AVERAGE RATING
-    // useEffect(() => {
-    //     let sum = 0;
-    //     reviews.forEach((review) => {
-    //         sum += review.rating
-    //     })
-    //     const average = sum / reviews.length
-    //     setRating(average)
-    // }, [reviews])
+    const [comment, setComment] = useState<string | undefined>("")
+    const [inputRating, setInputRating] = useState(0) //number to be sent to db
+    const rate: reviews = {
+        user_id: user?.uid || "",
+        user_name: user?.username || "",
+        rating: inputRating,
+        comment: comment
+    }
+
+    //  INSERT CODE TO CALCULATE AVERAGE RATING and store in rating
+
+
+    useEffect(() => {
+        console.log(rate)
+    }, [rate])
 
 
 
@@ -40,6 +51,7 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
             className=" bg-teal-600 group relative block w-40 md:w-64  xl:w-full max-w-xs mx-auto overflow-hidden rounded-md shadow-sm"
 
         >
+
 
 
             <img
@@ -71,7 +83,7 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
 
                 <p className="mt-1.5 text-xs md:text-sm text-gray-700" onClick={() => { navigateToProductPage() }}> ₹{product.price}{product.soldBy ? `, offered by ${product.soldBy}` : null} </p>
 
-                <form className="mt-4">
+                <div className="mt-4">
 
                     {(whatPage === "merchant") && <button
                         className="block w-full rounded-sm bg-teal-500  p-1 md:p-4 text-xs md:text-sm font-medium transition hover:scale-105"
@@ -96,13 +108,31 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
 
                     >Fulfill order from {product.boughtBy}</button>}
                     {(whatPage === "orders") && null}
-                    {(whatPage === "orderhistory") && <div><button
-                        className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
+                    {(whatPage === "orderhistory") && <div>
+                        <h1 className="underline">Leave a review</h1>
+                        <form action="">
+                            <input type="text" placeholder="Great Product!" onChange={(e) => { setComment(e.target.value) }} />
+                            <br />
+                            {/* <div className="flex space-x-1 mt-2">
+                                <ReviewStar isFull={false} />  <ReviewStar isFull={false} /> <ReviewStar isFull={false} /><ReviewStar isFull={false} /><ReviewStar isFull={false} />
+                            </div> */}
+                            <div className="flex space-x-1 mt-2">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <button
+                                        key={star}
+                                        type="button"
+                                        onClick={() => setInputRating(star)}
+                                        className="focus:outline-none"
+                                    >
+                                        <ReviewStar isFull={star <= inputRating} />
+                                    </button>
+                                ))}
+                            </div>
 
-                        onClick={(e) => { e.preventDefault(); }}
-
-                    >Add review </button></div>}
-                </form>
+                            <button onClick={(e) => { e.preventDefault(); addReview(product, rate) }}>Submit</button>
+                        </form>
+                    </div>}
+                </div>
             </div>
         </a>
     );

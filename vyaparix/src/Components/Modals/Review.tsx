@@ -1,7 +1,7 @@
 
 const Rating = ({ size, rating }: { size: string, rating: number }) => {
 
-
+    size = "small" //only small has been implemented
     return (
         <>
 

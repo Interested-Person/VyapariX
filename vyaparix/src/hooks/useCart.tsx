@@ -115,35 +115,35 @@ export const useCart = () => {
 
     }
 
-    const addReview = async (product: product, newReview: reviews) => {
-        if (!user) return;
+    // const addReview = async (product: product, newReview: reviews) => {
+    //     if (!user) return;
 
-        const productDoc = doc(db, "products", product.docID as string);
-        const productSnap = await getDoc(productDoc);
+    //     const productDoc = doc(db, "products", product.docID as string);
+    //     const productSnap = await getDoc(productDoc);
 
-        if (!productSnap.exists()) {
-            console.error("Product not found");
-            return;
-        }
+    //     if (!productSnap.exists()) {
+    //         console.error("Product not found");
+    //         return;
+    //     }
 
-        const productData = productSnap.data();
-        const existingReviews: reviews[] = productData.reviews || [];
+    //     const productData = productSnap.data();
+    //     const existingReviews: reviews[] = productData.reviews || [];
 
-        // Filter out any review from the same user
-        const updatedReviews = existingReviews.filter(
-            (review) => review.user_id !== user.uid
-        );
+    //     // Filter out any review from the same user
+    //     const updatedReviews = existingReviews.filter(
+    //         (review) => review.user_id !== user.uid
+    //     );
 
-        // Add the new/updated review
-        updatedReviews.push(newReview);
+    //     // Add the new/updated review
+    //     updatedReviews.push(newReview);
 
-        // Update the product document
-        await updateDoc(productDoc, {
-            reviews: updatedReviews,
-        });
+    //     // Update the product document
+    //     await updateDoc(productDoc, {
+    //         reviews: updatedReviews,
+    //     });
 
-        console.log("Review added/updated successfully");
-    }
+    //     console.log("Review added/updated successfully");
+    // }
 
-    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder, orderHistory, addReview };
+    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder, orderHistory, };
 };
