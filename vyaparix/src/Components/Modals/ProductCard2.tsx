@@ -5,6 +5,8 @@ import { useMerchant } from "../../hooks/useMerchant";
 import { useCart } from "../../hooks/useCart";
 
 import { useNavigate } from "react-router-dom";
+import Review from "./Review";
+import { useEffect, useState } from "react";
 
 
 let c = 0;
@@ -13,11 +15,22 @@ let c = 0;
 const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage: string, docID: string }) => {
 
     const { deleteProduct } = useMerchant();
-    const { addToCart, removeFromCart, fulfillOrder } = useCart();
+    const { addToCart, removeFromCart, fulfillOrder, addReview } = useCart();
     const navigate = useNavigate()
     const navigateToProductPage = () => {
         navigate(`/productpage/${docID}`)
     }
+    const [rating, setRating] = useState(0)
+    useEffect(() => {
+        let rating = 0;
+        let no_of_ratings = product?.reviews?.length || 1
+        product?.reviews?.forEach(review => {
+            rating += review.rating
+        });
+        rating = rating / no_of_ratings
+        setRating(rating)
+    }, [product])
+
 
 
     return (
@@ -52,7 +65,8 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
                     })}
                 </div>
 
-                <h3 className="mt-4 text-sm md:text-lg font-medium text-gray-900" onClick={() => { navigateToProductPage() }}>{product.name}</h3>
+                <h3 className="mt-4 text-sm md:text-lg font-medium text-gray-900" onClick={() => { navigateToProductPage() }}>{product.name} </h3>
+                <Review size={"small"} rating={rating} />
 
                 <p className="mt-1.5 text-xs md:text-sm text-gray-700" onClick={() => { navigateToProductPage() }}> ₹{product.price}{product.soldBy ? `, offered by ${product.soldBy}` : null} </p>
 
@@ -81,7 +95,12 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
 
                     >Fulfill order from {product.boughtBy}</button>}
                     {(whatPage === "orders") && null}
+                    {(whatPage === "orderhistory") && <button
+                        className="block w-full rounded-sm bg-teal-500 p-1 md:p-4 text-sm font-medium transition hover:scale-105"
 
+                        onClick={(e) => { e.preventDefault(); addReview(product) }}
+
+                    >Add review </button>}
                 </form>
             </div>
         </a>

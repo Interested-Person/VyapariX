@@ -17,7 +17,7 @@ import { useModal } from "./useModal";
 export const useMerchant = () => {
   const { user } = useAuth();
   const [selfProducts, setSelfProducts] = useState<product[]>([]);
-  const {open} = useModal();
+  const { open } = useModal();
   useEffect(() => {
     if (!user) return;
 
@@ -55,8 +55,8 @@ export const useMerchant = () => {
       await deleteDoc(docRef);
       open(`Deleted product with ID: ${productId}`)
       console.log(`✅ Deleted product with ID: ${productId}`);
-    } catch (err:any) {
-      open("❌ Failed to delete product "+err.toString());
+    } catch (err: any) {
+      open("❌ Failed to delete product " + err.toString());
       console.error("❌ Failed to delete product:", err);
     }
   };
