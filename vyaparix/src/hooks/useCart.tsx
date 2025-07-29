@@ -117,7 +117,7 @@ export const useCart = () => {
 
     const addReview = async (product: product) => {
         console.log("adding review")
-        const productDoc = doc(db, "products", product.docID as string);
+        //const productDoc = doc(db, "products", product.docID as string);
     }
 
     return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder, orderHistory, addReview };

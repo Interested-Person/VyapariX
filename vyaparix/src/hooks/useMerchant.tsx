@@ -7,7 +7,8 @@ import {
   addDoc,
   serverTimestamp,
   doc,
-  deleteDoc
+  deleteDoc,
+  updateDoc
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import type { product } from "../types/types";
@@ -41,11 +42,14 @@ export const useMerchant = () => {
 
     const collectionRef = collection(db, "products");
 
-    await addDoc(collectionRef, {
+    const docRef = await addDoc(collectionRef, {
       ...newProduct,
       sellerID: user.uid,
       createdAt: serverTimestamp(),
     });
+    await updateDoc(docRef, {
+      docID: docRef.id
+    })
   };
   const deleteProduct = async (productId: string) => {
     if (!user) return;
