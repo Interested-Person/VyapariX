@@ -6,6 +6,8 @@ import { useCart } from "../hooks/useCart";
 import type { product } from "../types/types"; // your product type
 import placeholderimage from '../assets/placeholderimage.jpg';
 import { useNavigate } from "react-router-dom";
+import ReviewComponent from "../Components/ReviewComponent";
+import Review from "../Components/Modals/Review";
 
 let c = 0
 const ProductPage = () => {
@@ -14,6 +16,8 @@ const ProductPage = () => {
   const { productID } = useParams();
 
   const [product, setProduct] = useState<product | null>(null);
+
+  const [avgRating, setAvgRating] = useState(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -27,6 +31,27 @@ const ProductPage = () => {
 
     fetchProduct();
   }, [productID]);
+  //  INSERT CODE TO CALCULATE AVERAGE RATING and store in rating
+  useEffect(() => {
+    let sum = 0;
+    let len = -1;
+
+    const currentProduct = product;
+
+    if (currentProduct && currentProduct.reviews) {
+      currentProduct.reviews.forEach((r) => {
+        sum += r.rating;
+      });
+      len = currentProduct.reviews.length;
+    }
+
+    let avgRating = 0;
+    if (len > 0) {
+      avgRating = sum / len;
+    }
+
+    setAvgRating(Math.trunc(Number(avgRating.toFixed(1))));
+  }, [product]);
 
   return (
     <div className="flex flex-col gap-4 w-screen min-h-screen ">
@@ -177,7 +202,7 @@ const ProductPage = () => {
 
                   <div className=" text-gray-500 dark:text-gray-400">
                     {/* <p className="my-3 text-3xl underline">Description</p> */}
-                    <div className="mb-1 flex overflow-x-scroll hide-scrollbar" >
+                    <div className="mb-2 flex overflow-x-scroll hide-scrollbar" >
                       {product?.tag?.map((t) => {
 
                         return (
@@ -185,7 +210,10 @@ const ProductPage = () => {
                         )
                       })}
                     </div>
+                    <Review rating={avgRating} />
                     {product.description}
+                    <br />
+
                   </div>
 
 
@@ -215,6 +243,14 @@ const ProductPage = () => {
                   </svg>
                   Add to Cart
                 </button>
+
+              </div>
+              <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+              <div>
+                <p className="my-3 text-3xl underline text-white">Reviews</p>
+                {product?.reviews?.map((r) => (<div><ReviewComponent username={r.user_name} rating={r.rating} comment={r.comment || ""} />
+                  <hr className="my-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" /></div>))}
+
               </div>
             </div>
 
