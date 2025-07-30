@@ -54,7 +54,7 @@ const ProductCard2 = ({ product, whatPage, docID }: { product: product, whatPage
             avgRating = sum / len;
         }
 
-        setRating(Number(avgRating.toFixed(1)));
+        setRating(Math.trunc(Number(avgRating.toFixed(1))));
     }, [products, docID]);
 
 
