@@ -247,7 +247,7 @@ const ProductPage = () => {
               </div>
               <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
               <div>
-                <p className="my-3 text-3xl underline text-white">Reviews</p>
+                <div className="my-3 text-3xl underline text-white">Reviews</div>
                 {product?.reviews?.map((r) => (<div><ReviewComponent username={r.user_name} rating={r.rating} comment={r.comment || ""} />
                   <hr className="my-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" /></div>))}
 

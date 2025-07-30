@@ -35,10 +35,10 @@ const ReviewComponent = ({ username, rating, comment }: { username: string, rati
                     </div>
                 </div>
                 <div className="mt-4 min-w-0 flex-1 space-y-4 sm:mt-0">
-                    <p className="text-base font-normal text-gray-500 dark:text-gray-400">
+                    <div className="text-base font-normal text-gray-500 dark:text-gray-400">
                         <Review rating={rating} />
                         {comment ? comment : "I loved the product so much.  5/5"}
-                    </p>
+                    </div>
 
                 </div>
             </div>
