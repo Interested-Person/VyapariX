@@ -43,20 +43,20 @@ const Navbar = () => {
           className="hover:scale-105 cursor-pointer mr-4 flex items-center gap-2 text-teal-100 text-xs"
           onClick={() => navigate("/")}
         >
-          <img src={Logo} className="h-18 md:h-16" alt="" />
+          <img src={Logo} className="h-13 md:h-16" alt="" />
           <span className="absolute hidden md:block top-12  text-xs font-bold">
             {user?.isMerchant ? "for Merchants" : ""}
           </span>
         </span> {/* logo */}
 
-        <div className="relative w-40 sm:w-60 md:w-80 ">
+        <div className="relative md:max-w-96 max-w-25 flex-grow">
 
           <input
             type="text"
             value={searchText}
             onChange={handleChange}
-            className="rounded-md bg-white w-40 h-12 md:w-full text-gray-700 outline-0 p-2 px-5"
-            placeholder="What's on your mind today?"
+            className="rounded-md bg-white w-full h-12 md:w-full text-gray-700 outline-0 p-2 px-5"
+            placeholder="Search..."
           />
           {isSearch && (
             <XMarkIcon
@@ -88,7 +88,7 @@ const Navbar = () => {
           )}
 
           <ShoppingCartIcon
-            className="text-teal-400 h-10 mx-2 cursor-pointer hover:scale-105"
+            className="text-teal-400 w-10 h-10 mx-0 cursor-pointer hover:scale-105"
             onClick={() => navigate("/cart")}
           /> {/* cart icon */}
         </div> {/*profile pic and cart icon*/}
