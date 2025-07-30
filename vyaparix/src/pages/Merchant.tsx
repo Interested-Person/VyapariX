@@ -13,7 +13,7 @@ const Merchant = () => {
             <h2 className="text-sm md:text-xl text-white">Your options</h2>
             <div className="flex gap-2 md:gap-10 text-xs md:text-sm ">
                 <button className="bg-teal-400 p-1 md:p-4 rounded-md" onClick={() => navigate("/addproduct")}>Add new product</button>
-                <button className="bg-teal-400 p-1 md:p-4 rounded-md" >Check revenue</button>
+                <button className="bg-teal-400 p-1 md:p-4 rounded-md" onClick={() => { user?.isMerchant && navigate("/saleshistory") }}>Check sales</button>
                 <button className="bg-teal-400 p-1 md:p-4 rounded-md" onClick={() => { user?.isMerchant && navigate("/merchantorders") }}>Check pending Orders</button>
 
             </div>

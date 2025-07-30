@@ -15,6 +15,7 @@ export const useCart = () => {
     const [orders, setOrders] = useState<product[]>([]); //orders for customer
     const [pendingOrders, setPendingOrders] = useState<product[]>([]);
     const [orderHistory, setOrderHistory] = useState<product[]>([]);
+    const [salesHistory, setSalesHistory] = useState<product[]>([]);
 
     const { user } = useAuth();
     const { open } = useModal()
@@ -29,6 +30,7 @@ export const useCart = () => {
             setOrders(data?.orders || []) //set orders
             setPendingOrders(data?.pendingOrders || [])
             setOrderHistory(data?.orderHistory || [])
+            setSalesHistory(data?.salesHistory || [])
         });
 
         return () => unsubscribe();
@@ -95,10 +97,11 @@ export const useCart = () => {
                     item.docID === product.docID &&
                     item.buyerID === product.buyerID
                 )
-            )
-            ,
-        });
+            ),
+            salesHistory: [...salesHistory, product],
 
+        });
+        //removing merchant (here he's the user) order contingency
         const buyerDoc = doc(db, "users", product.buyerID as string);
         const buyerSnap = await getDoc(buyerDoc)
         const buyerData = buyerSnap.data()
@@ -145,5 +148,5 @@ export const useCart = () => {
     //     console.log("Review added/updated successfully");
     // }
 
-    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder, orderHistory, };
+    return { cart, addToCart, removeFromCart, isInCart, addToOrders, orders, pendingOrders, fulfillOrder, orderHistory, salesHistory };
 };

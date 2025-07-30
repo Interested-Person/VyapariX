@@ -17,6 +17,7 @@ import AddProduct from './pages/AddProduct'
 import Modal from './Components/Modals/Modal'
 import { ModalProvider } from './hooks/useModal'
 import { ProductsProvider } from './hooks/useProducts'
+import SalesHistory from './pages/SalesHistory'
 function App() {
   const { needsMerchantInfo, completeRegistration } = useAuth();
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path='/merchantorders' element={<MerchantOrders />}></Route>
               <Route path='/orders' element={<Orders />}></Route>
               <Route path='/orderhistory' element={<OrderHistory />}></Route>
+              <Route path='/saleshistory' element={<SalesHistory />}></Route>
               <Route path="/*" element={<Home />}></Route>
 
 
